@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from itertools import takewhile
 import sys
 import argparse
+import yaml
 
 """
    At first, the analytical solution for a single-phase flow is used to find pressure
@@ -18,19 +19,29 @@ import argparse
 
 begin = argparse.ArgumentParser(description = 'This program simulates steady \
                                 influx using drift-flux model')
-begin.add_argument('-alpha', '--initial_gas_fraction', required = True,
-                   help = 'specify initial gas influx concentration')
-α_G0 = begin.parse_args(sys.argv[1:])
+begin.add_argument('-alpha', '--initial_gas_fraction', type = float, required = True,
+                   help = 'specify initial gas influx concentration (start with 0.01)')
+list_of_args = begin.parse_args(sys.argv[1:])
+α_G0 = list_of_args.initial_gas_fraction
+
+with open('input.yaml', 'r') as f:
+    inputs = yaml.safe_load(f)
 
 # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
 
 # Necessary parameters:
-v_L0 = 0.5 # m/s - single-phase flow velocity at the bottom of the well
-p_0 = 10000000 # Pa - single-phase flow pressure at the bottom of the well
-L = 100 # m - distance at which boundary conditions for two-phase flow occur
-H = 200 # m - depth of the wellbore
-h = 0.001 # m - (5cm) spatial step
-# α_G0 = 0.01 # boundary condition for gaseous phase volume fraction
+v_L0 = inputs["v_L0"]
+p_0 = inputs["p_0"]
+L = inputs["L"]
+H = inputs["H"]
+h = inputs["h"]
+
+# # Necessary parameters:
+# v_L0 = 0.5 # m/s - single-phase flow velocity at the bottom of the well
+# p_0 = 10000000 # Pa - single-phase flow pressure at the bottom of the well
+# L = 100 # m - distance at which boundary conditions for two-phase flow occur
+# H = 200 # m - depth of the wellbore
+# h = 0.001 # m - (5cm) spatial step
 
 # Initialize lists for all the unknowns and coordinate
 x = [0, L]

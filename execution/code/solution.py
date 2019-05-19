@@ -4,6 +4,8 @@ from .boundary_conditions import BC
 import numpy as np
 import matplotlib.pyplot as plt
 from itertools import takewhile
+import sys
+import argparse
 
 """
    At first, the analytical solution for a single-phase flow is used to find pressure
@@ -14,7 +16,13 @@ from itertools import takewhile
    small spatial step is recommended.
 """
 
-# Two-phae flow occurs at the same very coordinate at which single-phase flow ends.
+begin = argparse.ArgumentParser(description = 'This program simulates steady \
+                                influx using drift-flux model')
+begin.add_argument('-alpha', '--initial_gas_fraction', required = True,
+                   help = 'specify initial gas influx concentration')
+α_G0 = begin.parse_args(sys.argv[1:])
+
+# Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
 
 # Necessary parameters:
 v_L0 = 0.5 # m/s - single-phase flow velocity at the bottom of the well
@@ -22,7 +30,7 @@ p_0 = 10000000 # Pa - single-phase flow pressure at the bottom of the well
 L = 100 # m - distance at which boundary conditions for two-phase flow occur
 H = 200 # m - depth of the wellbore
 h = 0.001 # m - (5cm) spatial step
-α_G0 = 0.01 # boundary condition for gaseous phase volume fraction
+# α_G0 = 0.01 # boundary condition for gaseous phase volume fraction
 
 # Initialize lists for all the unknowns and coordinate
 x = [0, L]

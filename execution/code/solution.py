@@ -36,13 +36,6 @@ L = inputs["L"]
 H = inputs["H"]
 h = inputs["h"]
 
-# # Necessary parameters:
-# v_L0 = 0.5 # m/s - single-phase flow velocity at the bottom of the well
-# p_0 = 10000000 # Pa - single-phase flow pressure at the bottom of the well
-# L = 100 # m - distance at which boundary conditions for two-phase flow occur
-# H = 200 # m - depth of the wellbore
-# h = 0.001 # m - (5cm) spatial step
-
 # Initialize lists for all the unknowns and coordinate
 x = [0, L]
 α_L_x = [0]

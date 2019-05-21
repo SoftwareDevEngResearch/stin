@@ -2,7 +2,6 @@ def run():
     from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
                            derivative_α_G, α_L, derivative_v_L, cond
     from .boundary_conditions import BC
-    from itertools import takewhile
     from importlib import resources
     import numpy as np
     import matplotlib.pyplot as plt

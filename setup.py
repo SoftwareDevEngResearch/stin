@@ -18,8 +18,8 @@ setup(
     author="Ivan Nepomnyashchikh",
     author_email="nepomnyi@oregonstate.edu",
     license="MIT",
-    python_requires = '>=3',
-    zip_safe = False,
+    python_requires='>=3',
+    zip_safe=False,
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',

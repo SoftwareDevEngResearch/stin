@@ -28,7 +28,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Natural Language :: English',
-        'Intended Audience :: Engineering/Research'
     ],
     packages=['stin', 'stin.tests'],
     include_package_data=True,

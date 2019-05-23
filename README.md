@@ -1,6 +1,6 @@
 # Steady gas-liquid flow with influx modeling
 
-![Build Status](https://travis-ci.org/nepomnyi/Two-phase_flows.svg?branch=master) (https://travis-ci.org/nepomnyi/Two-phase_flows)
+![Build Status](https://travis-ci.org/nepomnyi/stin.svg?branch=master) (https://github.com/nepomnyi/stin)
 
 # About
 &nbsp;&nbsp;&nbsp;Steady influx modeling package (stin) allows for simulation of steady influx of gas into a vertical steady flow of liquid for a limited range of flow parameters.It is built on drift-flux model.    

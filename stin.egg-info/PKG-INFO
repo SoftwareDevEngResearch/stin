@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: stin
+Version: 0.1.0
+Summary: Simulates steady influx of air into water
+Home-page: https://github.com/SoftwareDevEngResearch/stin
+Author: Ivan Nepomnyashchikh
+Author-email: nepomnyi@oregonstate.edu
+License: MIT
+Description: # Steady gas-liquid flow with influx modeling
+        
+        ![Build Status](https://travis-ci.org/nepomnyi/Two-phase_flows.svg?branch=master) (https://travis-ci.org/nepomnyi/Two-phase_flows)
+        
+        # About
+        &nbsp;&nbsp;&nbsp;Steady influx modeling package (stin) allows for simulation of steady influx of gas into a vertical steady flow of liquid for a limited range of flow parameters.It is built on drift-flux model.    
+        &nbsp;&nbsp;&nbsp;This is a python package, so one should have python (with the standart library) installed installed on the computer.
+        
+        # Installation
+        ## Installation from source
+        - Download the [package] from GitHub.
+        - On your computer, from the command line of your choice go to the package root repository.
+        - In the command line, type in: py setup.py install (this command will install the package with all necessary dependencies).
+        
+        # Getting started
+        - In command line (being in any directory - it doesn't matter) type in: py -m stin -alpha 0.01:
+            - -m runs the package as a module,
+            - -alpha is a variable that the package takes to run the code,
+            - 0.01 is the value of the variable: can be anything from 0 to 1 not including the extremes.
+        - The package can also be imported from within python but it is a pointless action since the package requires user's input from command line.
+        - The output is a set of graphs of each flow parameter with relation to the length of the vertical pipe.
+        
+        # Acknowledgment
+        [FRIDGe], that helped me to set TravisCI up.
+        
+        [FRIDGe]: https://github.com/SoftwareDevEngResearch/FRIDGe
+        [package]: https://github.com/SoftwareDevEngResearch/stin
+        
+        
+        # Changelog
+        All notable changes to the project will be documented in this file.
+        
+        The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+        
+        ## [Unreleased]
+        
+        ## [0.1.0] - 2019-06-7
+        ### Added
+        - This CHANGELOG file to serve as a standardized log of changes in the project.
+        - LICENCE file to set the rules of usage of this project.
+        - README file to get users introduced with the purpose of the project, way it works and guidance to installation process.
+        - setup file for installation from PyPI.
+        
+        [Unreleased]: https://github.com/SoftwareDevEngResearch/stin
+        [0.1.0]: https://github.com/SoftwareDevEngResearch/stin
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Natural Language :: English
+Requires-Python: >=3
+Description-Content-Type: text/markdown

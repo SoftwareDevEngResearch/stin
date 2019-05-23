@@ -1,4 +1,4 @@
-from .execution.code.solution import run
+from .stin.solution import run
 
 def main():
     run()

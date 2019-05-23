@@ -1,4 +1,4 @@
-from functions import α_L, ρ_G, BC_v_G
+from .functions import α_L, ρ_G, BC_v_G
 
 class BC:
     """

@@ -2,8 +2,8 @@
 ##### requirements.txt #####
 #
 ##### Requirements without Version Specifiers #####
-pytest
+pytest==3.6
+pytest-cov
 numpy
-pandas
 PyYAML
 #

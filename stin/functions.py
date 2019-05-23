@@ -1,4 +1,4 @@
-from parameters import γ, C_0, v_s, a, ρ_L, g, f, D
+from .parameters import γ, C_0, v_s, a, ρ_L, g, f, D
 
 # Functions for single-phase flow:
 

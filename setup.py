@@ -1,24 +1,28 @@
 import pathlib
 from setuptools import setup
 
-# The directory containing this file
 HERE = pathlib.Path(__file__).parent
 
-# The text of the README file
-README = (HERE / "README.md").read_text()
+README = (HERE / 'README.md').read_text()
+CHANGELOG = (HERE / 'CHANGELOG.md').read_text()
+ldisc = README + '\n\n' + CHANGELOG
 
-# This call to setup() does all the work
+VERSION = (HERE / '_version.py').read_text()
+exec(VERSION)
+
 setup(
     name="stin",
-    version="0.1.0",
+    version=__version__,
     description="Simulates steady influx of air into water",
-    long_description=README,
+    long_description=ldisc,
     long_description_content_type="text/markdown",
     url="https://github.com/SoftwareDevEngResearch/stin",
     author="Ivan Nepomnyashchikh",
     author_email="nepomnyi@oregonstate.edu",
     license="MIT",
     python_requires='>=3',
+    install_requires=['numpy', 'matplotlib', 'pyyaml'],
+    tests_require=['pytest==3.6', 'pytest-cov'],
     zip_safe=False,
     classifiers=[
         'License :: OSI Approved :: MIT License',
@@ -28,5 +32,4 @@ setup(
     ],
     packages=['stin', 'stin.tests'],
     include_package_data=True,
-    install_requires=['numpy', 'matplotlib', 'pyyaml'],
 )

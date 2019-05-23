@@ -25,7 +25,7 @@ def run():
     list_of_args = begin.parse_args(sys.argv[1:])
     α_G0 = list_of_args.initial_gas_fraction
 
-    with resources.open_text('Two-phase_flows.stin', 'input.yaml') as f:
+    with resources.open_text('stin', 'input.yaml') as f:
         inputs = yaml.safe_load(f)
 
     # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.

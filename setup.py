@@ -26,7 +26,7 @@ setup(
         'Natural Language :: English',
         'Intended Audience :: Engineering/Research'
     ],
-    packages=['execution', 'execution.code', 'execution.tests'],
+    packages=['stin', 'stin.tests'],
     include_package_data=True,
     install_requires=['numpy', 'matplotlib', 'pyyaml'],
 )

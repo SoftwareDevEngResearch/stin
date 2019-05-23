@@ -1,4 +1,4 @@
-from ..code.functions import single_v_L, single_p, derivative_p, α_L, ρ_G, \
+from ..functions import single_v_L, single_p, derivative_p, α_L, ρ_G, \
                              BC_v_G, derivative_v_G, derivative_α_G, \
                              derivative_v_L, cond
 

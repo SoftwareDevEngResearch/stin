@@ -2,7 +2,6 @@ from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G,
                        derivative_α_G, α_L, derivative_v_L, cond
 from .boundary_conditions import BC
 from importlib import resources
-import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import argparse
@@ -15,9 +14,24 @@ def run():
        At second, system of equation describing gas-liquid flow will be solved numerically
        via explicit Euler method. The system seems to be stiff (due to significant
        difference between pressure and velocity (and volume fraction) values. Hence,
-       small spatial step is recommended.
+       small spatial step is recommended. This function solves the system of equations
+       for the unknowns: α_L - volume fraction of the liquid phase
+                         α_G - volume fraction of the gaseous phase
+                         v_L - velocity of the liquid phase
+                         v_G - velocity of the gaseous phase
+                         ρ_G - density of the gaseous phase
+                         p - pressure of the mixture (i.e., of the gas-liquid flow)
+
+       Args:
+           none - takes no arguments
+
+       Returns:
+           python list of lists: the return iterable (list of all unknonws).
     """
 
+    # For the releases 0.1.0 and 0.2.0, user is only allowed use gaseous phase
+    # volume fraction as an input parameter. Other input parameters are plased
+    # into the input file input.yaml and their change can entail simulation failure.
     begin = argparse.ArgumentParser(description = 'This program simulates steady \
                                     influx using drift-flux model')
     begin.add_argument('-alpha', '--initial_gas_fraction', type = float, required = True,
@@ -28,16 +42,15 @@ def run():
     with resources.open_text('stin', 'input.yaml') as f:
         inputs = yaml.safe_load(f)
 
-    # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
-
-    # Necessary parameters:
+    # α_G0 is the first input parameter. Other input parameters are:
     v_L0 = inputs["v_L0"]
     p_0 = inputs["p_0"]
     L = inputs["L"]
     H = inputs["H"]
     h = inputs["h"]
 
-    # Initialize lists for all the unknowns and coordinate
+    # Initialize lists for all the unknowns and coordinate. These lists will be
+    # the function's return.
     x = [0, L]
     α_L_x = [0]
     α_G_x = [0]
@@ -48,7 +61,10 @@ def run():
 
     # Single-phase flow model solution (anlytical):
 
-    # First, assign values to all the variables at the two-phase flow edge (at x=L).
+    # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
+    # Having analytical solution for single-phase flow, velocity and pressure of
+    # single-phase flow at x = L (coordinate where two-phase flow begins) can be
+    # used as boundary conditions for the two-phase flow.
     v_L_x.append(single_v_L(v_L0, L))
     p_x.append(single_p(v_L_x[1], L, p_x[0]))
 
@@ -56,7 +72,8 @@ def run():
 
     kick = BC(α_G0, v_L_x[1], p_x[1])
 
-    # First, assign values to all the variables at the two-phase flow edge (at x=L).
+    # First, assign values to all the variables at the two-phase flow edge (at x=L),
+    # i.e., created boundary conditions for two-phase flow.
     α_L_x.append(kick.α_L)
     α_G_x.append(kick.α_G)
     v_G_x.append(kick.v_G)
@@ -76,6 +93,8 @@ def run():
         new_α_L = α_L(new_α_G)
         dv_L = derivative_v_L(v_L_x[i], α_L_x[i], dα_G)
         new_v_L = v_L_x[i] + h*dv_L
+        # The following if block is necessary for capturing the condition imposed
+        # by the 6th equation of the system (prevents v_L from going negative).
         if new_α_G < cond(new_v_G):
             x.append(new_x)
             p_x.append(new_p) # (1)
@@ -86,7 +105,8 @@ def run():
             v_L_x.append(new_v_L) # (6)
         else:
             break
-
+    # The markers are added to each of the unknowns in order to realize plotting
+    # as one function.
     p_x.append(5)
     ρ_G_x.append(4)
     v_G_x.append(3)
@@ -95,9 +115,11 @@ def run():
     v_L_x.append(2)
 
     results = [x, α_L_x, α_G_x, v_L_x, v_G_x, ρ_G_x, p_x]
-    
+
     return(results)
 
+# Plotting flow parameters against spatial coordinate is the ultimate goal of
+# this package.
 raw_results = run()
 x = raw_results[0]
 results = raw_results[1:]
@@ -108,7 +130,18 @@ description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimension
               ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
               ['p', 'pressure', 'pressure (p), Pa']]
 def plotting(array):
-    i = array[len(array)-1]
+    """
+       Plots the results against spatial coordinate. Every unknown being a list,
+       has a marker as the last member of the list. This function recognizes which
+       unknown is taken as an argument by its marker.
+
+       Args:
+           array (list) - list of values of a particular unknown.
+
+       Returns:
+           plot: the return value (matplotlib figure). Given unknonw vs x.
+    """
+    i = array[len(array)-1] # looks for the marker of the given array
     plt.figure(description[i][0])
     plt.plot(x, results[i][:(len(results[i])-1)], label=description[i][1])
     plt.xlim( left=100, right=max(x) )

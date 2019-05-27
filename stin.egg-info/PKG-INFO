@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: stin
-Version: 0.1.0
+Version: 0.2.0
 Summary: Simulates steady influx of air into water
 Home-page: https://github.com/SoftwareDevEngResearch/stin
 Author: Ivan Nepomnyashchikh
@@ -46,15 +46,20 @@ Description: # Steady gas-liquid flow with influx modeling
         
         ## [Unreleased]
         
-        ## [0.1.0] - 2019-06-7
+        ## [0.1.0] - 2019-05-23
         ### Added
         - This CHANGELOG file to serve as a standardized log of changes in the project.
         - LICENCE file to set the rules of usage of this project.
         - README file to get users introduced with the purpose of the project, way it works and guidance to installation process.
-        - setup file for installation from PyPI.
+        - setup file for installation from PyPI and source.
+        
+        ## [0.2.0] - 2019-05-26
+        ### Added
+        - Parallel processing for plotting results.
         
         [Unreleased]: https://github.com/SoftwareDevEngResearch/stin
         [0.1.0]: https://github.com/SoftwareDevEngResearch/stin
+        [0.2.0]: https://github.com/SoftwareDevEngResearch/stin
         
 Platform: UNKNOWN
 Classifier: License :: OSI Approved :: MIT License

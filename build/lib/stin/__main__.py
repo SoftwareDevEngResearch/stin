@@ -1,7 +1,9 @@
-from .solution import run
+from . import solution
+from multiprocessing import Pool
+# from matplotlib import pyplot as plt
 
-def main():
-    run()
+
 
 if __name__ == "__main__":
-    main()
+    po = Pool(processes=6)
+    graphs = po.map(solution.plotting, solution.results)

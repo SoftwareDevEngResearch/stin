@@ -1,15 +1,14 @@
-def run():
-    from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
-                           derivative_α_G, α_L, derivative_v_L, cond
-    from .boundary_conditions import BC
-    from multiprocessing import Pool
-    from importlib import resources
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import sys
-    import argparse
-    import yaml
+from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
+                       derivative_α_G, α_L, derivative_v_L, cond
+from .boundary_conditions import BC
+from importlib import resources
+import numpy as np
+import matplotlib.pyplot as plt
+import sys
+import argparse
+import yaml
 
+def run():
     """
        At first, the analytical solution for a single-phase flow is used to find pressure
        and velocity of liquid at the point where gas influx occurs.
@@ -88,73 +87,32 @@ def run():
         else:
             break
 
-    # # Convert lists to numpy arrays for faster plotting:
-    # x = np.array(x)
-    # α_L_x = np.array(α_L_x)
-    # α_G_x = np.array(α_G_x)
-    # v_L_x = np.array(v_L_x)
-    # v_G_x = np.array(v_G_x)
-    # ρ_G_x = np.array(ρ_G_x)
-    # p_x = np.array(p_x)
+    p_x.append(5)
+    ρ_G_x.append(4)
+    v_G_x.append(3)
+    α_G_x.append(1)
+    α_L_x.append(0)
+    v_L_x.append(2)
 
-    results = x, α_L_x, α_G_x, v_L_x, v_G_x, ρ_G_x, p_x
-    # description = ('α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'),\
-    #               ('α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'),\
-    #               ('v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'),\
-    #               ('v_G', 'gas velocity', 'gas velocity (v_G), m/s'),\
-    #               ('ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'),\
-    #               ('p', 'pressure', 'pressure (p), Pa')
-    # def plotting(i):
-    #     plt.figure(description[i][0])
-    #     plt.plot(x, results[i], label=description[i][1])
-    #     plt.xlim( left=100, right=max(x) )
-    #     plt.legend()
-    #     plt.xlabel('wellbore length (x), m')
-    #     plt.ylabel(description[i][2])
-    # po = Pool(processes=4)
-    # graphs = po.map(plotting, results)
-
-    # liqiud_fraction = plt.figure('α_L')
-    # plt.plot(x, α_L_x, label='liquid fraction')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('liquid fraction (α_L), nondimensional')
-    #
-    # gas_fraction = plt.figure('α_G')
-    # plt.plot(x, α_G_x, label='gas fraction')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('gas fraction (α_G), nondimensional')
-    #
-    # liqiud_velocity = plt.figure('v_L')
-    # plt.plot(x, v_L_x, label='liquid velocity')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('liquid velocity (v_L), m/s')
-    #
-    # gas_velocity = plt.figure('v_G')
-    # plt.plot(x, v_G_x, label='gas velocity')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('gas velocity (v_G), m/s')
-    #
-    # gas_density = plt.figure('ρ_G')
-    # plt.plot(x, ρ_G_x, label='gas density')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('gas denstiy (ρ_G), kg/m^3')
-    #
-    # pressure = plt.figure('p')
-    # plt.plot(x, p_x, label='pressure')
-    # plt.xlim( left=100, right=np.amax(x) )
-    # plt.legend()
-    # plt.xlabel('wellbore length (x), m')
-    # plt.ylabel('pressure (p), Pa')
-
-    # plt.show()
+    results = [x, α_L_x, α_G_x, v_L_x, v_G_x, ρ_G_x, p_x]
+    
     return(results)
+
+raw_results = run()
+x = raw_results[0]
+results = raw_results[1:]
+description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\
+              ['α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'],\
+              ['v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'],\
+              ['v_G', 'gas velocity', 'gas velocity (v_G), m/s'],\
+              ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
+              ['p', 'pressure', 'pressure (p), Pa']]
+def plotting(array):
+    i = array[len(array)-1]
+    plt.figure(description[i][0])
+    plt.plot(x, results[i][:(len(results[i])-1)], label=description[i][1])
+    plt.xlim( left=100, right=max(x) )
+    plt.legend()
+    plt.xlabel('wellbore length (x), m')
+    plt.ylabel(description[i][2])
+    plt.show()

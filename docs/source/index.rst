@@ -15,6 +15,21 @@ Welcome to stin's documentation!
 
 
 
+
+Code API
+========
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+  solution
+  functions
+  boundary_conditions
+  parameters
+
+
+
 Indices and tables
 ==================
 

@@ -1,0 +1,4 @@
+solution
+========
+
+.. automodule:: stin.solution

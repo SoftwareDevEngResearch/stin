@@ -14,6 +14,12 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import os
+import sys
+
+on_travis = os.environ.get('TRAVIS') == 'True'
+if not on_travis:
+    sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -31,7 +37,24 @@ release = '0.2.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+        'sphinx.ext.autodoc',
+        'sphinx.ext.doctest',
+        'sphinx.ext.napoleon',
+        'sphinx.ext.mathjax',
+        'sphinx.ext.intersphinx',
+        'recommonmark',
 ]
+
+autodoc_default_options = {'members': True}
+autoclass_content = 'class'
+napoleon_numpy_docstring = False
+napoleon_google_docstring = True
+intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None)}
+source_suffix = {
+  '.rst': 'restructuredtext',
+  '.txt': 'markdown',
+  '.md': 'markdown',
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -39,7 +62,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
 # -- Options for HTML output -------------------------------------------------

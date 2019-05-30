@@ -4,6 +4,6 @@
 ##### Requirements without Version Specifiers #####
 pytest==3.6
 pytest-cov
-numpy
 PyYAML
+matplotlib
 #

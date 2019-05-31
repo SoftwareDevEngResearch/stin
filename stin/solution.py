@@ -4,7 +4,6 @@ from .boundary_conditions import BC
 from importlib import resources
 import matplotlib.pyplot as plt
 import sys
-import argparse
 import yaml
 
 def run(α_G0):

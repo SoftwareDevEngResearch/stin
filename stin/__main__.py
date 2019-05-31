@@ -1,6 +1,7 @@
 from . import solution
 from multiprocessing import Pool
 import argparse
+import sys
 
 
 def main():
@@ -10,7 +11,9 @@ def main():
                         help = 'specify initial gas influx concentration (start with 0.01)')
     list_of_args = begin.parse_args(sys.argv[1:])
     α_G0 = list_of_args.initial_gas_fraction
+
     raw_results = run(α_G0)
+
     po = Pool(processes=6)
     graphs = po.map(solution.plotting(raw_results), solution.results)
 

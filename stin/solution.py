@@ -3,7 +3,6 @@ from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G,
 from .boundary_conditions import BC
 from importlib import resources
 import matplotlib.pyplot as plt
-import sys
 import yaml
 
 def run(α_G0):

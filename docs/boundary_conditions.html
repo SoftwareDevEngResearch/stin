@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>boundary_conditions &#8212; stin 0.2.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="functions" href="functions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-stin.boundary_conditions">
+<span id="boundary-conditions"></span><h1>boundary_conditions<a class="headerlink" href="#module-stin.boundary_conditions" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="stin.boundary_conditions.BC">
+<em class="property">class </em><code class="descclassname">stin.boundary_conditions.</code><code class="descname">BC</code><span class="sig-paren">(</span><em>α_G</em>, <em>v_L</em>, <em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.boundary_conditions.BC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boundary conditions for two-phase flow. Boundary conditions can’t be
+assigned randomly because they are connected by the equations from the
+system. Thus, boundary conditions for v_L and p are calculated from the
+sinle-phase flow solution, for α_G - specified by user randomly. The other
+boundary conditions are to be calculated from the equations. This class
+is devoted for it. __init__ initializes the flow’s boundary conditions with
+supplied values for gaseous phase volume fraction, gaseous phase velocity
+and flow pressure. First list down below represents class’s attributes.
+The next list down below shows __init__ arguments.</p>
+<dl class="attribute">
+<dt id="stin.boundary_conditions.BC.α_L">
+<code class="descname">α_L</code><a class="headerlink" href="#stin.boundary_conditions.BC.α_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>liquid phase volume fraction, dimensionless</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="stin.boundary_conditions.BC.α_G">
+<code class="descname">α_G</code><a class="headerlink" href="#stin.boundary_conditions.BC.α_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>gaseous phase volume fraction, dimensionless</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="stin.boundary_conditions.BC.v_G">
+<code class="descname">v_G</code><a class="headerlink" href="#stin.boundary_conditions.BC.v_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>gaseous phase velocity, [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="stin.boundary_conditions.BC.ρ_G">
+<code class="descname">ρ_G</code><a class="headerlink" href="#stin.boundary_conditions.BC.ρ_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>gaseous phase density, [kg/m^3]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – gaseous phase volume fraction, dimensionless</p></li>
+<li><p><strong>v_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – liquid phase velocity, [m/s]</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – pressure of the mixture, [Pa]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">stin</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_pip.html">Installation from TestPyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_source.html">Installation from source</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="solution.html">solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">boundary_conditions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="functions.html" title="previous chapter">functions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Ivan Nepomnyashchikh.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/boundary_conditions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

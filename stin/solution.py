@@ -7,7 +7,7 @@ import sys
 import argparse
 import yaml
 
-def run():
+def run(α_G0):
     """
        At first, the analytical solution for a single-phase flow is used to find pressure
        and velocity of liquid at the point where gas influx occurs.
@@ -30,12 +30,6 @@ def run():
     # For the releases 0.1.0 and 0.2.0, user is only allowed use gaseous phase
     # volume fraction as an input parameter. Other input parameters are plased
     # into the input file input.yaml and their change can entail simulation failure.
-    begin = argparse.ArgumentParser(description = 'This program simulates steady \
-                                    influx using drift-flux model')
-    begin.add_argument('-alpha', '--initial_gas_fraction', type = float, required = True,
-                        help = 'specify initial gas influx concentration (start with 0.01)')
-    list_of_args = begin.parse_args(sys.argv[1:])
-    α_G0 = list_of_args.initial_gas_fraction
 
     with resources.open_text('stin', 'input.yaml') as f:
         inputs = yaml.safe_load(f)
@@ -118,16 +112,7 @@ def run():
 
 # Plotting flow parameters against spatial coordinate is the ultimate goal of
 # this package.
-raw_results = run()
-x = raw_results[0]
-results = raw_results[1:]
-description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\
-              ['α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'],\
-              ['v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'],\
-              ['v_G', 'gas velocity', 'gas velocity (v_G), m/s'],\
-              ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
-              ['p', 'pressure', 'pressure (p), Pa']]
-def plotting(array):
+def plotting(raw_results, array):
     """
        Plots the results against spatial coordinate. Every unknown being a list,
        has a marker as the last member of the list. This function recognizes which
@@ -139,6 +124,14 @@ def plotting(array):
        Returns:
            plot: the return value (matplotlib figure). Given unknonw vs x.
     """
+    x = raw_results[0]
+    results = raw_results[1:]
+    description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\
+                  ['α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'],\
+                  ['v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'],\
+                  ['v_G', 'gas velocity', 'gas velocity (v_G), m/s'],\
+                  ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
+                  ['p', 'pressure', 'pressure (p), Pa']]
     i = array[len(array)-1] # looks for the marker of the given array
     plt.figure(description[i][0])
     plt.plot(x, results[i][:(len(results[i])-1)], label=description[i][1])

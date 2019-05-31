@@ -1,0 +1,4 @@
+parameters
+==========
+
+.. automodule:: stin.parameters

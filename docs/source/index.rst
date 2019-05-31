@@ -23,10 +23,9 @@ Code API
    :maxdepth: 2
    :caption: Contents:
 
-  solution
-  functions
-  boundary_conditions
-  parameters
+   solution
+   functions
+   boundary_conditions
 
 
 

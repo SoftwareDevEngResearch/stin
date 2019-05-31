@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>solution &#8212; stin 0.2.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="functions" href="functions.html" />
+    <link rel="prev" title="Installation from source" href="installation_source.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-stin.solution">
+<span id="solution"></span><h1>solution<a class="headerlink" href="#module-stin.solution" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="stin.solution.plotting">
+<code class="descclassname">stin.solution.</code><code class="descname">plotting</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.solution.plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the results against spatial coordinate. Every unknown being a list,
+has a marker as the last member of the list. This function recognizes which
+unknown is taken as an argument by its marker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>array</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the return value (matplotlib figure). Given unknonw vs x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>plot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.solution.run">
+<code class="descclassname">stin.solution.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stin.solution.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>At first, the analytical solution for a single-phase flow is used to find pressure
+and velocity of liquid at the point where gas influx occurs.
+At second, system of equation describing gas-liquid flow will be solved numerically
+via explicit Euler method. The system seems to be stiff (due to significant
+difference between pressure and velocity (and volume fraction) values. Hence,
+small spatial step is recommended. This function solves the system of equations
+for the unknowns: <em>α_L - volume fraction of the liquid phase</em>, <em>α_G - volume
+fraction of the gaseous phase</em>, <em>v_L - velocity of the liquid phase</em>,
+<em>v_G - velocity of the gaseous phase</em>, <em>ρ_G - density of the gaseous phase</em>,
+<em>p - pressure of the mixture (i.e., of the gas-liquid flow)</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>- the function takes no arguments</strong> (<em>none</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the return iterable (list of all unknonws).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>python list of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">stin</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_pip.html">Installation from TestPyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_source.html">Installation from source</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">boundary_conditions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation_source.html" title="previous chapter">Installation from source</a></li>
+      <li>Next: <a href="functions.html" title="next chapter">functions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Ivan Nepomnyashchikh.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/solution.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

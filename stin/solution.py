@@ -15,15 +15,13 @@ def run():
        via explicit Euler method. The system seems to be stiff (due to significant
        difference between pressure and velocity (and volume fraction) values. Hence,
        small spatial step is recommended. This function solves the system of equations
-       for the unknowns: α_L - volume fraction of the liquid phase
-                         α_G - volume fraction of the gaseous phase
-                         v_L - velocity of the liquid phase
-                         v_G - velocity of the gaseous phase
-                         ρ_G - density of the gaseous phase
-                         p - pressure of the mixture (i.e., of the gas-liquid flow)
+       for the unknowns: *α_L - volume fraction of the liquid phase*, *α_G - volume
+       fraction of the gaseous phase*, *v_L - velocity of the liquid phase*,
+       *v_G - velocity of the gaseous phase*, *ρ_G - density of the gaseous phase*,
+       *p - pressure of the mixture (i.e., of the gas-liquid flow)*.
 
        Args:
-           none - takes no arguments
+           none - the function takes no arguments
 
        Returns:
            python list of lists: the return iterable (list of all unknonws).
@@ -35,7 +33,7 @@ def run():
     begin = argparse.ArgumentParser(description = 'This program simulates steady \
                                     influx using drift-flux model')
     begin.add_argument('-alpha', '--initial_gas_fraction', type = float, required = True,
-                       help = 'specify initial gas influx concentration (start with 0.01)')
+                        help = 'specify initial gas influx concentration (start with 0.01)')
     list_of_args = begin.parse_args(sys.argv[1:])
     α_G0 = list_of_args.initial_gas_fraction
 

@@ -2,6 +2,7 @@
 ##### requirements.txt #####
 #
 ##### Requirements without Version Specifiers #####
+python==3.7
 pytest==3.6
 pytest-cov
 PyYAML

@@ -6,5 +6,5 @@ pytest==3.6
 pytest-cov
 PyYAML
 matplotlib
-importlib_resources
+importlib.resources
 #

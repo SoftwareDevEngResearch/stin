@@ -13,9 +13,10 @@ def main():
     α_G0 = list_of_args.initial_gas_fraction
 
     raw_results = solution.run(α_G0)
+    results = raw_results[1:]
 
     po = Pool(processes=6)
-    graphs = po.map(solution.plotting(raw_results), solution.results)
+    graphs = po.map(solution.plotting(raw_results), results)
 
 if __name__ == '__main__':
     main()

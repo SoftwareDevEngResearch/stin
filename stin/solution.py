@@ -1,7 +1,7 @@
 from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
                        derivative_α_G, α_L, derivative_v_L, cond
 from .boundary_conditions import BC
-from importlib.resources import open_text
+from importlib import resources
 import matplotlib.pyplot as plt
 import yaml
 
@@ -34,7 +34,7 @@ def run(α_G0):
     # volume fraction as an input parameter. Other input parameters are plased
     # into the input file input.yaml and their change can entail simulation failure.
 
-    with open_text('stin', 'input.yaml') as f:
+    with resources.open_text('stin', 'input.yaml') as f:
         inputs = yaml.safe_load(f)
 
     # α_G0 is the first input parameter. Other input parameters are:

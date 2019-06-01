@@ -1,11 +1,12 @@
 #
 ##### requirements.txt #####
 #
+##### Requirements with Version Specifiers #####
+pytest==3.6 # pytest-cov works only with pytest>=3.6 on Travis CI
+
 ##### Requirements without Version Specifiers #####
-python==3.7
-pytest==3.6
 pytest-cov
 PyYAML
 matplotlib
-importlib.resources
+importlib_resources
 #

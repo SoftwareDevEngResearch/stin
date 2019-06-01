@@ -19,10 +19,15 @@ def run(α_G0):
        *p - pressure of the mixture (i.e., of the gas-liquid flow)*.
 
        Args:
-           none - the function takes no arguments
+           α_G_0 (float) - boundary condition for gaseous phase volume fraction.
+                           Can assume any value from 0 to 1 (not including the
+                           margins).
 
        Returns:
-           python list of lists: the return iterable (list of all unknonws).
+           python list of lists of lists: the return iterable. Each item in the
+                                          iterable contains spatial variable and
+                                          one of the unknowns. It is done in order
+                                          to simplify dealing with plotting function.
     """
 
     # For the releases 0.1.0 and 0.2.0, user is only allowed use gaseous phase
@@ -117,12 +122,13 @@ def plotting(array):
        unknown is taken as an argument by its marker.
 
        Args:
-           array (list) - list of values of a particular unknown.
+           array (list of lists) - first item in the list is a list of values of
+                                   spatial coordinate; second item is a list of
+                                   values of one of the unknowns.
 
        Returns:
-           plot: the return value (matplotlib figure). Given unknonw vs x.
+           plot: the return value (matplotlib figures). Shows an unknonw vs x.
     """
-    print(array)
     x = array[0]
     results = array[1]
     description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\

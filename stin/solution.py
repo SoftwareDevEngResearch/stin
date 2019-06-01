@@ -104,13 +104,13 @@ def run(α_G0):
     α_L_x.append(0)
     v_L_x.append(2)
 
-    results = [x, α_L_x, α_G_x, v_L_x, v_G_x, ρ_G_x, p_x]
+    results = [ [x, α_L_x], [x, α_G_x], [x, v_L_x], [x, v_G_x], [x, ρ_G_x], [x, p_x] ]
 
     return(results)
 
 # Plotting flow parameters against spatial coordinate is the ultimate goal of
 # this package.
-def plotting(raw_results, array):
+def plotting(array):
     """
        Plots the results against spatial coordinate. Every unknown being a list,
        has a marker as the last member of the list. This function recognizes which
@@ -122,17 +122,18 @@ def plotting(raw_results, array):
        Returns:
            plot: the return value (matplotlib figure). Given unknonw vs x.
     """
-    x = raw_results[0]
-    results = raw_results[1:]
+    print(array)
+    x = array[0]
+    results = array[1]
     description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\
                   ['α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'],\
                   ['v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'],\
                   ['v_G', 'gas velocity', 'gas velocity (v_G), m/s'],\
                   ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
                   ['p', 'pressure', 'pressure (p), Pa']]
-    i = array[len(array)-1] # looks for the marker of the given array
+    i = results[len(results)-1] # looks for the marker of the given array
     plt.figure(description[i][0])
-    plt.plot(x, results[i][:(len(results[i])-1)], label=description[i][1])
+    plt.plot(x, results[:(len(results)-1)], label=description[i][1])
     plt.xlim( left=100, right=max(x) )
     plt.legend()
     plt.xlabel('wellbore length (x), m')

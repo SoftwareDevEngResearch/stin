@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>solution &#8212; stin 0.2.0 documentation</title>
+    <title>solution &#8212; stin 0.2.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -42,10 +42,11 @@ has a marker as the last member of the list. This function recognizes which
 unknown is taken as an argument by its marker.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>array</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a>) – </p>
+<dd class="field-odd"><p><strong>array</strong> (<em>list of lists</em>) – spatial coordinate; second item is a list of
+values of one of the unknowns.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the return value (matplotlib figure). Given unknonw vs x.</p>
+<dd class="field-even"><p>the return value (matplotlib figures). Shows an unknonw vs x.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>plot</p>
@@ -55,7 +56,7 @@ unknown is taken as an argument by its marker.</p>
 
 <dl class="function">
 <dt id="stin.solution.run">
-<code class="descclassname">stin.solution.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stin.solution.run" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">stin.solution.</code><code class="descname">run</code><span class="sig-paren">(</span><em>α_G0</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.solution.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>At first, the analytical solution for a single-phase flow is used to find pressure
 and velocity of liquid at the point where gas influx occurs.
 At second, system of equation describing gas-liquid flow will be solved numerically
@@ -68,13 +69,20 @@ fraction of the gaseous phase</em>, <em>v_L - velocity of the liquid phase</em>,
 <em>p - pressure of the mixture (i.e., of the gas-liquid flow)</em>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>- the function takes no arguments</strong> (<em>none</em>) – </p>
+<dd class="field-odd"><p><strong>α_G_0</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – Can assume any value from 0 to 1 (not including the
+margins).</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the return iterable (list of all unknonws).</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return iterable. Each item in the</dt><dd><p>iterable contains spatial variable and
+one of the unknowns. It is done in order
+to simplify dealing with plotting function.</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>python list of lists</p>
+<dd class="field-odd"><p>python list of lists of lists</p>
 </dd>
 </dl>
 </dd></dl>

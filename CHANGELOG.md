@@ -16,6 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Parallel processing for plotting results.
 
+## [0.2.1] - 2019-06-01
+### Added
+- Documentation website
+### Changed
+- Plotting and code running functions
+
 [Unreleased]: https://github.com/SoftwareDevEngResearch/stin
 [0.1.0]: https://github.com/SoftwareDevEngResearch/stin
 [0.2.0]: https://github.com/SoftwareDevEngResearch/stin
+[0.2.1]: https://github.com/SoftwareDevEngResearch/stin

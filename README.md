@@ -5,7 +5,8 @@
 
 # About
 &nbsp;&nbsp;&nbsp;Steady influx modeling package (stin) allows for simulation of steady influx of gas into a vertical steady flow of liquid for a limited range of flow parameters. It is built on drift-flux model.    
-&nbsp;&nbsp;&nbsp;This is a python package, so one should have python (with the standard library) installed on the computer.
+&nbsp;&nbsp;&nbsp;This is a python package, so one should have python (with the standard library) installed on the computer.  
+&nbsp;&nbsp;&nbsp;The package has a [documentation website].
 
 # Installation
 ## Installation from source
@@ -29,3 +30,4 @@
 
 [FRIDGe]: https://github.com/SoftwareDevEngResearch/FRIDGe
 [package]: https://github.com/SoftwareDevEngResearch/stin
+[documentation website]: https://nepomnyi.github.io/stin/

@@ -8,5 +8,4 @@ pytest==3.6 # pytest-cov works only with pytest>=3.6 on Travis CI
 pytest-cov
 PyYAML
 matplotlib
-importlib_resources
 #

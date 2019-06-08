@@ -21,7 +21,7 @@ setup(
     author_email="nepomnyi@oregonstate.edu",
     license="MIT",
     python_requires='>=3',
-    install_requires=['numpy', 'matplotlib', 'pyyaml'],
+    install_requires=['matplotlib', 'pyyaml'],
     tests_require=['pytest==3.6', 'pytest-cov'],
     zip_safe=False,
     classifiers=[

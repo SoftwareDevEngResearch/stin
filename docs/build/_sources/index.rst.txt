@@ -10,8 +10,8 @@ Welcome to stin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   installation_pip
-   installation_source
+   README
+   CHANGELOG
 
 
 

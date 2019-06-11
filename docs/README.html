@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>stin v0.2.1 &#8212; stin 0.2.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="CHANGELOG.html" />
+    <link rel="prev" title="Welcome to stin’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="stin-v0-2-1">
+<h1>stin v0.2.1<a class="headerlink" href="#stin-v0-2-1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://travis-ci.org/nepomnyi/stin"><img alt="https://travis-ci.org/nepomnyi/stin.svg?branch=master" src="https://travis-ci.org/nepomnyi/stin.svg?branch=master" />Build Status</a>
+<a class="reference external" href="https://opensource.org/licenses/MIT"><img alt="https://img.shields.io/badge/license-MIT-blue.svg" src="https://img.shields.io/badge/license-MIT-blue.svg" />License</a></p>
+</div>
+<div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<p>   Steady influx modeling package (stin) allows for simulation of steady influx of gas into a vertical steady flow of liquid for a limited range of flow parameters. It is built on drift-flux model.   This is a python package, so one should have python (with the standard library) installed on the computer. Required python version is 3.7 or newer.
+   The package has a <a class="reference external" href="https://nepomnyi.github.io/stin/">documentation website</a>. It is worth mentioning, that the <a class="reference external" href="https://nepomnyi.github.io/stin/">documentation website</a> is still under construction and currently has bad readability. Therefore, it is recommended to use this documentation file along with <a class="reference external" href="https://github.com/SoftwareDevEngResearch/course-projects-s2019/blob/master/reports/Nepomnyashchikh-project-report.pdf">the report</a> for the purpose of the package exploration. As soon as the <a class="reference external" href="https://nepomnyi.github.io/stin/">documentation website</a> is updated, this paragraph will notify users about that.
+To date, one can find mathematical description of the package along with the software description in <a class="reference external" href="https://github.com/SoftwareDevEngResearch/course-projects-s2019/blob/master/reports/Nepomnyashchikh-project-report.pdf">the report</a>.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation-from-source">
+<h2>Installation from source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Download the <a class="reference external" href="https://github.com/SoftwareDevEngResearch/stin">package</a> from GitHub. Then there are 2 options.</p></li>
+<li><p><em>1st option</em>:</p>
+<ul>
+<li><p>On your computer, from the command line of your choice, go to the package root repository.</p></li>
+<li><p>In the command line, type in:<strong>py setup.py install</strong>(this command will install the package with all necessary dependencies).</p></li>
+<li><p>In this case, the package can only be uninstalled manually. For Windows go to *<em>C:\Users\your_user_name\AppData\Local\Continuum\anaconda3\Lib\site-packages*</em>There you may find a folder called <strong>stin-0.2.0-py3.7.egg</strong> (the folder name may vary dependently on the package version and version of python you use). Delete this folder and the package will be deleted.Note that AppData is a hidden folder.For OSX and Linux the process of uninstallation was not tested.</p></li>
+</ul>
+</li>
+<li><p><em>2nd option</em>:</p>
+<ul>
+<li><p>On your computer, from the command line of your choice, being in any directory (it doesn’t matter), type in:<strong>pip install &lt;path to the package’s root directory&gt;</strong>E.g. for windows:<strong>pip install C:\Users\your_user_name\Documents\stin</strong>In this example, stin is the root directory of the package: the one which contains setup.py file.</p></li>
+<li><p>In order to uninstall the package, from command line of your choice, being in any directory (it doesn’t matter), type in:<strong>pip uninstall stin</strong></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation-from-testpypi">
+<h2>Installation from TestPyPI<a class="headerlink" href="#installation-from-testpypi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In the command line of your choice (in any directory - it doesn’t matter), type in:<strong>pip install -i https://test.pypi.org/simple/ stin</strong></p></li>
+<li><p>To uninstall the package use:<strong>pip uninstall stin</strong></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Let’s consider usage of the package on the example.</p>
+<ul class="simple">
+<li><p>In command line (being in any directory - it doesn’t matter) type in: <strong>py -m stin -alpha 0.01</strong>:</p>
+<ul>
+<li><p>alternatively, it can be run as: <strong>py -m stin –initial_gas_fraction 0.01</strong>,</p></li>
+<li><p>-m runs the package as a module,</p></li>
+<li><p>-alpha (or –initial_gas_fraction) is a variable that the package takes to run the code - it is influx’s initial volume fraction,</p></li>
+<li><p>0.01 is the value of the variable: can be anything from 0 to 1 not including the extremes:</p>
+<ul>
+<li><p>for the zeroth version of the package it is not recommended to specify initial gas fraction values more than 0.4.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>The output is a set of graphs for each flow variable with relation to the length of the vertical pipe,</p>
+<ul>
+<li><p>the flow variables are velocities of gas and liquid phases, volume fractions of gas and liquid phases, gas phase density, flow pressure - their distributions along the flow is the output of the software,</p></li>
+<li><p>one may find plots for the current example with explanation in the section 4 of <a class="reference external" href="https://github.com/SoftwareDevEngResearch/course-projects-s2019/blob/master/reports/Nepomnyashchikh-project-report.pdf">the report</a>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Using installation from source:</p>
+<ul>
+<li><p>In command line, being in the root directory of the package, type in: <strong>pytest</strong> or <strong>pytest -vv –cov=./</strong></p></li>
+<li><p>In both cases the result is the same: a user will see two tables</p>
+<ul>
+<li><p>the first one will contain names of the unit and integration tests and passing marks to the right of them,</p></li>
+<li><p>the second one will contain test coverage,</p></li>
+<li><p>test coverage for the package is 82%:</p>
+<ul>
+<li><p>test coverage doesn’t work in TravisCI, that is why continuous integration status badge at the top of this file shows <em>failing</em> - fixing this issue entails rewriting a chunk of code and is considered to be a part of future work,</p></li>
+<li><p>integration tests are not written for the plotting function, that is why test coverage is 82% only; writing tests for the plotting function is above the author’s knowledge, hence, is considered to be time consuming and left for the future work.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Using installation from TestPyPI:</p>
+<ul>
+<li><p>the author is not aware of any way to apply either <em>pytest</em> or <em>pytest-cov</em> on an installed package,</p></li>
+<li><p>testing can be done only from within package’s root directory - for that purpose the package should be downloaded from GitHub and the above described procedure can be implemented.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="acknowledgment">
+<h1>Acknowledgment<a class="headerlink" href="#acknowledgment" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/SoftwareDevEngResearch/FRIDGe">FRIDGe</a>, that helped me to set TravisCI up.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">stin</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">stin v0.2.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#about">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-from-testpypi">Installation from TestPyPI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">boundary_conditions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to stin’s documentation!</a></li>
+      <li>Next: <a href="CHANGELOG.html" title="next chapter">Changelog</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Ivan Nepomnyashchikh.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/README.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -22,7 +22,7 @@
     For OSX and Linux the process of uninstallation was not tested.
 - *2nd option*:
     - On your computer, from the command line of your choice, being in any directory (it doesn't matter), type in:  
-    **pip install <path to the project's directory>**   
+    **pip install <path to the package's root directory>**   
     E.g. for windows:  
     **pip install C:\Users\your_user_name\Documents\stin**  
     In this example, stin is the root directory of the package: the one which contains setup.py file.
@@ -32,7 +32,7 @@
 
 ## Installation from TestPyPI
 - In the command line of your choice (in any directory - it doesn't matter), type in:  
-**py -m pip -i https://test.pypi.org/simple/ stin**
+**pip -i https://test.pypi.org/simple/ stin**
 - To uninstall the package use:  
 **pip uninstall stin**
 

@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>functions &#8212; stin 0.2.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="boundary_conditions" href="boundary_conditions.html" />
+    <link rel="prev" title="solution" href="solution.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-stin.functions">
+<span id="functions"></span><h1>functions<a class="headerlink" href="#module-stin.functions" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="stin.functions.BC_v_G">
+<code class="descclassname">stin.functions.</code><code class="descname">BC_v_G</code><span class="sig-paren">(</span><em>α_L</em>, <em>v_L</em>, <em>α_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.BC_v_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>The only purpose of this function is to make sure that two-phase flow
+boundary condition for v_G is consistent with the mathematical model. I.e.,
+by the moment an influx occurs I know liquid phase velocity as a result
+of the single-phase model solution. Hence, at the boundary of two-phase
+flow I specify v_L and calculate v_G. Hence, I need a function to find v_G.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>α_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>v_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – variable, not a function.</p></li>
+<li><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (boundary condition for gaseous phase velocity).</dt><dd><p>Can assume any positive value.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.cond">
+<code class="descclassname">stin.functions.</code><code class="descname">cond</code><span class="sig-paren">(</span><em>v_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that liquid velocity is positive (based on the condition obtained
+from the sixth equation of the system).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the return value. Can assume any positive value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.derivative_p">
+<code class="descclassname">stin.functions.</code><code class="descname">derivative_p</code><span class="sig-paren">(</span><em>α_L</em>, <em>α_G</em>, <em>ρ_G</em>, <em>v_L</em>, <em>v_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.derivative_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates pressure spatial derivative to be pluged into the expression for
+pressure at the next spatial step (see first equation of the model). It
+returns the value of pressure spatial derivative at the current time step
+and, hence, takes as arguments volume fractions, velocities, and gas density
+at the current spatial step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>α_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>ρ_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+<li><p><strong>v_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – negative values.</p></li>
+<li><p><strong>v_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (pressure derivative at the current spatial</dt><dd><p>step). Can assume any value from negative infinity to 0.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.derivative_v_G">
+<code class="descclassname">stin.functions.</code><code class="descname">derivative_v_G</code><span class="sig-paren">(</span><em>v_G</em>, <em>α_G</em>, <em>ρ_G</em>, <em>derivative_p</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.derivative_v_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates gaseous phase spatial velocity derivative at the current spatial
+step, therefore all the arguments assume their values at the current spatial
+step. Is used in the third equation of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+<li><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>ρ_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+<li><p><strong>derivative_p</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from negative infinity to 0. It is a variable,
+not a function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (gaseous phase velocity). Can assume any</dt><dd><p>positive value.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.derivative_v_L">
+<code class="descclassname">stin.functions.</code><code class="descname">derivative_v_L</code><span class="sig-paren">(</span><em>v_L</em>, <em>α_L</em>, <em>derivative_α_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.derivative_v_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates spatial derivative of liquid phase velocity at the current
+spatial step. Hence, all the arguments it takes assume their values at the
+current spatial step. It is used in the second version of the sixth
+equation of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – negative values.</p></li>
+<li><p><strong>α_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>derivative_α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – any value. It is a variable, not a function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (spatial liquid velocity derivative). Can assume</dt><dd><p>any value.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.derivative_α_G">
+<code class="descclassname">stin.functions.</code><code class="descname">derivative_α_G</code><span class="sig-paren">(</span><em>α_G</em>, <em>ρ_G</em>, <em>derivative_p</em>, <em>v_G</em>, <em>derivative_v_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.derivative_α_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates spatial derivative of gaseous volume fraction at the current
+spatial step. Hence, all the arguments it takes assume their values at
+the current spatial step. It is used in the fourth equation of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p></li>
+<li><p><strong>ρ_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+<li><p><strong>derivative_p</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from negative infinity to 0. It is a variable,
+not a function.</p></li>
+<li><p><strong>v_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p></li>
+<li><p><strong>derivative_v_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – any value. It is a variable, not a function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the return value (gaseous phase velocity). Can assume any value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.single_p">
+<code class="descclassname">stin.functions.</code><code class="descname">single_p</code><span class="sig-paren">(</span><em>v_L</em>, <em>L</em>, <em>p_0</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.single_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates pressure at the given point in a single-phase flow. See the second
+equation of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v_L</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – variable, not a function.</p></li>
+<li><p><strong>L</strong> (<em>integer</em>) – any positive value.</p></li>
+<li><p><strong>p_0</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (pressure at the specified point). Can assume</dt><dd><p>any positive value.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.single_v_L">
+<code class="descclassname">stin.functions.</code><code class="descname">single_v_L</code><span class="sig-paren">(</span><em>v_L0</em>, <em>L</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.single_v_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates velocity of a single-phase flow at the given position L along
+the wellbore. See the first equation of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v_L0</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – value.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (flow velocity). Can assume any positive value;</dt><dd><p>normaly should be equal to the function’s argument.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.α_L">
+<code class="descclassname">stin.functions.</code><code class="descname">α_L</code><span class="sig-paren">(</span><em>α_G</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.α_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates liquid phase volume fraction at the next spatial step. Hence,
+the argument it takes assumes its value at the next spatial step also.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>α_G</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – from 0 to 1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (liquid phase volume fraction). Can assume</dt><dd><p>any value in the range 0 to 1.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>α_L(0.3) = 0.7 - both entities are dimensionless</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="stin.functions.ρ_G">
+<code class="descclassname">stin.functions.</code><code class="descname">ρ_G</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#stin.functions.ρ_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates gas phase density at the next spatial step based on the pressure
+value at the next spatial step (see second equation of the model).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the return value (gaseous phase density). Can assume any</dt><dd><p>positive value.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)">float</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>ρ_G(50000000Pa) = 260kg/m^3</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">stin</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_pip.html">Installation from TestPyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_source.html">Installation from source</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="solution.html">solution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">boundary_conditions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="solution.html" title="previous chapter">solution</a></li>
+      <li>Next: <a href="boundary_conditions.html" title="next chapter">boundary_conditions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Ivan Nepomnyashchikh.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

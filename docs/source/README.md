@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/nepomnyi/stin.svg?branch=master)](https://travis-ci.org/nepomnyi/stin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3243702.svg)](https://doi.org/10.5281/zenodo.3243702)
 
 # About
 &nbsp;&nbsp;&nbsp;Steady influx modeling package (stin) allows for simulation of steady influx of gas into a vertical steady flow of liquid for a limited range of flow parameters. It is built on drift-flux model.    

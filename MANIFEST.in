@@ -1,3 +1,3 @@
 include LICENSE
 include CHANGELOG.md
-include execution/code/input.yaml
+include stin/input.yaml

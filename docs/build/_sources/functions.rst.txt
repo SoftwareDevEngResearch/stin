@@ -1,0 +1,4 @@
+functions
+=========
+
+.. automodule:: stin.functions

@@ -1,43 +1,51 @@
-def run():
-    from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
-                           derivative_α_G, α_L, derivative_v_L, cond
-    from .boundary_conditions import BC
-    from importlib import resources
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import sys
-    import argparse
-    import yaml
+from .functions import single_v_L, single_p, derivative_p, ρ_G, derivative_v_G, \
+                       derivative_α_G, α_L, derivative_v_L, cond
+from .boundary_conditions import BC
+from importlib import resources
+import matplotlib.pyplot as plt
+import yaml
 
+def run(α_G0):
     """
        At first, the analytical solution for a single-phase flow is used to find pressure
        and velocity of liquid at the point where gas influx occurs.
        At second, system of equation describing gas-liquid flow will be solved numerically
        via explicit Euler method. The system seems to be stiff (due to significant
        difference between pressure and velocity (and volume fraction) values. Hence,
-       small spatial step is recommended.
+       small spatial step is recommended. This function solves the system of equations
+       for the unknowns: *α_L - volume fraction of the liquid phase*, *α_G - volume
+       fraction of the gaseous phase*, *v_L - velocity of the liquid phase*,
+       *v_G - velocity of the gaseous phase*, *ρ_G - density of the gaseous phase*,
+       *p - pressure of the mixture (i.e., of the gas-liquid flow)*.
+
+       Args:
+           α_G_0 (float) - boundary condition for gaseous phase volume fraction.
+                           Can assume any value from 0 to 1 (not including the
+                           margins).
+
+       Returns:
+           python list of lists of lists: the return iterable. Each item in the
+                                          iterable contains spatial variable and
+                                          one of the unknowns. It is done in order
+                                          to simplify dealing with plotting function.
     """
 
-    begin = argparse.ArgumentParser(description = 'This program simulates steady \
-                                    influx using drift-flux model')
-    begin.add_argument('-alpha', '--initial_gas_fraction', type = float, required = True,
-                       help = 'specify initial gas influx concentration (start with 0.01)')
-    list_of_args = begin.parse_args(sys.argv[1:])
-    α_G0 = list_of_args.initial_gas_fraction
+    # For the releases 0.1.0 and 0.2.0, user is only allowed use gaseous phase
+    # volume fraction as an input parameter. Other input parameters are plased
+    # into the input file input.yaml and their change can entail simulation failure.
 
     with resources.open_text('stin', 'input.yaml') as f:
         inputs = yaml.safe_load(f)
 
-    # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
-
-    # Necessary parameters:
+    # α_G0 is the first input parameter. Other input parameters are:
     v_L0 = inputs["v_L0"]
     p_0 = inputs["p_0"]
     L = inputs["L"]
     H = inputs["H"]
     h = inputs["h"]
 
-    # Initialize lists for all the unknowns and coordinate
+    # Initialize lists for all the unknowns and coordinate. These lists will be
+    # the function's return.
     x = [0, L]
     α_L_x = [0]
     α_G_x = [0]
@@ -48,7 +56,10 @@ def run():
 
     # Single-phase flow model solution (anlytical):
 
-    # First, assign values to all the variables at the two-phase flow edge (at x=L).
+    # Two-phase flow occurs at the same very coordinate at which single-phase flow ends.
+    # Having analytical solution for single-phase flow, velocity and pressure of
+    # single-phase flow at x = L (coordinate where two-phase flow begins) can be
+    # used as boundary conditions for the two-phase flow.
     v_L_x.append(single_v_L(v_L0, L))
     p_x.append(single_p(v_L_x[1], L, p_x[0]))
 
@@ -56,7 +67,8 @@ def run():
 
     kick = BC(α_G0, v_L_x[1], p_x[1])
 
-    # First, assign values to all the variables at the two-phase flow edge (at x=L).
+    # First, assign values to all the variables at the two-phase flow edge (at x=L),
+    # i.e., created boundary conditions for two-phase flow.
     α_L_x.append(kick.α_L)
     α_G_x.append(kick.α_G)
     v_G_x.append(kick.v_G)
@@ -76,6 +88,8 @@ def run():
         new_α_L = α_L(new_α_G)
         dv_L = derivative_v_L(v_L_x[i], α_L_x[i], dα_G)
         new_v_L = v_L_x[i] + h*dv_L
+        # The following if block is necessary for capturing the condition imposed
+        # by the 6th equation of the system (prevents v_L from going negative).
         if new_α_G < cond(new_v_G):
             x.append(new_x)
             p_x.append(new_p) # (1)
@@ -86,56 +100,48 @@ def run():
             v_L_x.append(new_v_L) # (6)
         else:
             break
+    # The markers are added to each of the unknowns in order to realize plotting
+    # as one function.
+    p_x.append(5)
+    ρ_G_x.append(4)
+    v_G_x.append(3)
+    α_G_x.append(1)
+    α_L_x.append(0)
+    v_L_x.append(2)
 
-    # Convert lists to numpy arrays for faster plotting:
-    x = np.array(x)
-    α_L_x = np.array(α_L_x)
-    α_G_x = np.array(α_G_x)
-    v_L_x = np.array(v_L_x)
-    v_G_x = np.array(v_G_x)
-    ρ_G_x = np.array(ρ_G_x)
-    p_x = np.array(p_x)
+    results = [ [x, α_L_x], [x, α_G_x], [x, v_L_x], [x, v_G_x], [x, ρ_G_x], [x, p_x] ]
 
-    liqiud_fraction = plt.figure('α_L')
-    plt.plot(x, α_L_x, label='liquid fraction')
-    plt.xlim( left=100, right=np.amax(x) )
+    return(results)
+
+# Plotting flow parameters against spatial coordinate is the ultimate goal of
+# this package.
+def plotting(array):
+    """
+       Plots the results against spatial coordinate. Every unknown being a list,
+       has a marker as the last member of the list. This function recognizes which
+       unknown is taken as an argument by its marker.
+
+       Args:
+           array (list of lists) - first item in the list is a list of values of
+                                   spatial coordinate; second item is a list of
+                                   values of one of the unknowns.
+
+       Returns:
+           plot: the return value (matplotlib figures). Shows an unknonw vs x.
+    """
+    x = array[0]
+    results = array[1]
+    description = [['α_L', 'liquid fraction', 'liquid fraction (α_L), nondimensional'],\
+                  ['α_G', 'gas fraction', 'gas fraction (α_G), nondimensional'],\
+                  ['v_L', 'liquid velocity', 'liquid velocity (v_L), m/s'],\
+                  ['v_G', 'gas velocity', 'gas velocity (v_G), m/s'],\
+                  ['ρ_G', 'gas density', 'gas denstiy (ρ_G), kg/m^3'],\
+                  ['p', 'pressure', 'pressure (p), Pa']]
+    i = results[len(results)-1] # looks for the marker of the given array
+    plt.figure(description[i][0])
+    plt.plot(x, results[:(len(results)-1)], label=description[i][1])
+    plt.xlim( left=100, right=max(x) )
     plt.legend()
     plt.xlabel('wellbore length (x), m')
-    plt.ylabel('liquid fraction (α_L), nondimensional')
-
-    gas_fraction = plt.figure('α_G')
-    plt.plot(x, α_G_x, label='gas fraction')
-    plt.xlim( left=100, right=np.amax(x) )
-    plt.legend()
-    plt.xlabel('wellbore length (x), m')
-    plt.ylabel('gas fraction (α_G), nondimensional')
-
-    liqiud_velocity = plt.figure('v_L')
-    plt.plot(x, v_L_x, label='liquid velocity')
-    plt.xlim( left=100, right=np.amax(x) )
-    plt.legend()
-    plt.xlabel('wellbore length (x), m')
-    plt.ylabel('liquid velocity (v_L), m/s')
-
-    gas_velocity = plt.figure('v_G')
-    plt.plot(x, v_G_x, label='gas velocity')
-    plt.xlim( left=100, right=np.amax(x) )
-    plt.legend()
-    plt.xlabel('wellbore length (x), m')
-    plt.ylabel('gas velocity (v_G), m/s')
-
-    gas_density = plt.figure('ρ_G')
-    plt.plot(x, ρ_G_x, label='gas density')
-    plt.xlim( left=100, right=np.amax(x) )
-    plt.legend()
-    plt.xlabel('wellbore length (x), m')
-    plt.ylabel('gas denstiy (ρ_G), kg/m^3')
-
-    pressure = plt.figure('p')
-    plt.plot(x, p_x, label='pressure')
-    plt.xlim( left=100, right=np.amax(x) )
-    plt.legend()
-    plt.xlabel('wellbore length (x), m')
-    plt.ylabel('pressure (p), Pa')
-
+    plt.ylabel(description[i][2])
     plt.show()
